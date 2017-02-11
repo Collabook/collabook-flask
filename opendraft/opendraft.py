@@ -78,7 +78,7 @@ def login():
     if flask.request.method == 'GET':
         return flask.render_template('login.html')
     flask_login.login_user(User("admin@od.haze.pw", "test", 1), remember=True)
-    return flask.render_template('document.html')
+    return flask.redirect(flask.url_for('document'))
 
 @od.route('/document')
 @flask_login.login_required
