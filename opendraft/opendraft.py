@@ -81,7 +81,6 @@ def login():
     return flask.redirect(flask.url_for('document'))
 
 @od.route('/document')
-@flask_login.login_required
 def document():
     return flask.render_template('document.html')
 
