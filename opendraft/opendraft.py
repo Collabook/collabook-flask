@@ -69,7 +69,7 @@ class User(db.Model):
 #                                       #
 #########################################
 
-@app.route('/login', methods=['GET', 'POST'])
+@od.route('/login', methods=['GET', 'POST'])
 def login():
    if flask.request.method == 'GET':
       return flask.render_template('login.html')
@@ -108,7 +108,7 @@ def request_loader(request):
          return user
    return
 
-@app.route('/logout')
+@od.route('/logout')
 @flask_login.login_required
 def logout():
     user = flask_login.current_user
