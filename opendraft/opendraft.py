@@ -48,23 +48,14 @@ class User(db.Model):
    def usrExist(self, usr):
         return User.query.filter_by(self.email = usr).first() is None
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class Book(db.Model):
+    __tablename__ = 'book'
+
+    email = db.Column(db.String(80), primary_key=True, nullable=False)
+    password = db.Column(db.Stringb (1000000), nullable=False)
+
+    
+
 
     
     
