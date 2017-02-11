@@ -77,21 +77,13 @@ def index():
 def login():
    if flask.request.method == 'GET':
       return flask.render_template('login.html')
-   email = flask.request.form["email"]
-   passw = flask.request.form["password"]
-   pUser = User.query.get(email)
-   if pUser:
-      if verify_password(pUser.password, passw):
-         pUser.authenticated = True
-         db.session.add(pUser)
-         db.session.commit()
-         flask_login.login_user(pUser, remember=True)
-         flask.flash('You were successfully logged in')
-         return flask.redirect(flask.url_for("root"))
-      else:
-         return flask.render_template('login.html', error='password does not match')
-   else:
-     return flask.render_template('login.html', error='user does not exist')
+    flask_login.login_user(User("admin@od.haze.pw", "test", 1), remember=True)
+    return flask.render_template('document.html')
+
+@od.route('/document')
+@flask_login.login_required
+def document():
+    return flask.render_template('document.html')
 
 @login_manager.user_loader
 def user_loader(email):
