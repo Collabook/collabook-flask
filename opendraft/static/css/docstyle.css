@@ -11,3 +11,79 @@
     text-decoration: none;
     background: 0;
 }
+
+#loginFormDiv{
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+.loginForm{
+    padding: 50px;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    font-size: 24px;
+}
+
+.loginField{
+    outline: none;
+    width: 40%;
+    border: 5px solid #005a9b;
+    border-radius: 3px;
+    color: white;
+    background-color: #454545;
+    padding: 5px 10px 5px 10px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+.loginButton {
+    width: 150px;
+    height: 70px;
+    padding: 15px 25px;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+}
+
+.loginButton span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.loginButton span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.loginButton:hover span {
+  padding-right: 25px;
+}
+
+.loginButton:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.loginButton{
+    background-color: #005a9b;
+    box-shadow: 0 15px #003f6c;
+}
+
+.loginButton:hover {background-color: #006cba}
+
+.loginButton:active {
+  background-color: #006cba;
+  box-shadow: 0 10px #003f6c;
+  transform: translateY(4px);
+}
