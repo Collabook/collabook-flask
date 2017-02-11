@@ -1,0 +1,23 @@
+h3{
+    font-size: 30px;
+    color: #4591c7;
+}
+
+.description{
+    padding-left: 230px;
+    width: 500%;
+    margin-top: -298px;
+}
+
+.documents{
+    width: 210px;
+    height: 273px;
+    background-color: white;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #4591c7;
+}
+
+#doc1{
+    
+}

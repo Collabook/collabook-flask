@@ -1,3 +1,7 @@
+#homepage{
+    padding: 30px 70px 30px 70px;
+}
+
 .user{
     float: right;
     border-radius: 0px;
@@ -48,6 +52,7 @@
     color: #fff;
     border: none;
     border-radius: 15px;
+    margin-bottom: 100%;
 }
 
 .loginButton span {
