@@ -10,6 +10,6 @@ use ```pip install -r requirements.txt```
 
 authors
 --------
-haze - backend
-david - backend
-navid - frontend
+Navid - Frontend
+Haze - Backend
+David - Basically nothing
