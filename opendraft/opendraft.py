@@ -17,7 +17,7 @@ login_manager.login_view = "login"
 login_manager.init_app(od)
 
 class User(db.Model):
-   __tablename__ = 'users'
+   __tablename__ = 'users'f
 
    email = db.Column(db.String(80), primary_key=True, nullable=False)
    password = db.Column(db.String(128), nullable=False)
@@ -75,8 +75,8 @@ def index():
 
 @od.route('/login', methods=['GET', 'POST'])
 def login():
-   if flask.request.method == 'GET':
-      return flask.render_template('login.html')
+    if flask.request.method == 'GET':
+        return flask.render_template('login.html')
     flask_login.login_user(User("admin@od.haze.pw", "test", 1), remember=True)
     return flask.render_template('document.html')
 
