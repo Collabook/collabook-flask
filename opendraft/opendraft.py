@@ -5,6 +5,7 @@ from argon2 import PasswordHasher
 
 od = flask.Flask(__name__)
 od.debug = True
+(secret_key, g_client_id, g_client_sec) = read_for_secrets('google.secret')
 od.secret_key = secret_key
 od.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///databases/main.db'
 ph = PasswordHasher()
@@ -57,7 +58,6 @@ def read_for_secrets(file):
                     dev_sec = line.split('=')[1]
     return (dev_sec, id, secret)
 
-(secret_key, g_client_id, g_client_sec) = read_for_secrets('google.secret')
 
 #########################################
 #                                       #
