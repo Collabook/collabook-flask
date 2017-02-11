@@ -3,8 +3,13 @@ import flask_login
 from flask_sqlalchemy import SQLAlchemy
 from argon2 import PasswordHasher
 
+od = flask.Flask(__name__)
+od.debug = True
+od.secret_key = secret_key
+od.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///databases/main.db'
 ph = PasswordHasher()
-db = SQLAlchemy(app)
+db = SQLAlchemy(od)
+
 class User(db.Model):
    __tablename__ = 'users'
 
@@ -61,11 +66,6 @@ def read_for_secrets(file):
 #                                       #
 #                                       #
 #########################################
-
-od = flask.Flask(__name__)
-od.debug = True
-od.secret_key = secret_key
-od.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///databases/main.db'
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
