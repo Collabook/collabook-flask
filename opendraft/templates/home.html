@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>OpenDraft</title>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/stylesheet.css') }}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <meta name="google-signin-scope" content="profile email">
+        <meta name="google-signin-client_id" content="299211330534-8m6edc4on9j26u4m0o2v8nfb9jktqmra.apps.googleusercontent.com">
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+    </head>
+    <body>
+        <div id="header">
+            <button class="logIn">LOG IN</button>
+            <p class="openDraft">OPEN DRAFT</p>
+        </div>
+        <div id="homepage">
+            <div id="main">
+            <img src="{{ url_for('static', filename='assets/ODLogoWhite.png') }}" id="logo">
+            <h1>I am an...</h1>
+            <div id="buttonDiv">
+                <div class="column-left"><button class="button author">Author</button></div>
+                <div class="column-middle"><button class="button editor">Editor</button></div>
+                <div class="column-right"><button class="button publisher">Publisher</button></div>
+            </div>
+            </div>
+        </div>
+    </body>
+</html>

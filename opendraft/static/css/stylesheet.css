@@ -1,0 +1,136 @@
+#header{
+    height: 8%;
+    background-color: #005a9b;
+}
+
+.logIn {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: 'Roboto', sans-serif;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 10px 20px 10px 20px;
+  border: solid #ffffff 5px;
+  text-decoration: none;
+    background: 0;
+    vertical-align: middle;
+    display: block;
+}
+
+.logIn:hover {
+  background: #3cb0fd;
+  text-decoration: none;
+}
+
+#main{
+    margin: auto;
+    color: aliceblue;
+    font-family: 'Roboto', sans-serif;
+}
+
+#homepage{
+    background-color: #222222;
+    width: 100%;
+    height: 100%;
+}
+
+#logo{
+    display: block;
+    margin: auto;
+    width: 12%;
+    padding-top: 3%;
+}
+
+h1{
+    padding-top: 2%;
+    text-align: center;
+}
+
+#buttonDiv{
+    padding-left: 92px;
+    padding-top: 50px;
+    width: 80%;
+    margin: auto;
+}
+
+.button {
+    width: 250px;
+    height: 100px;
+    padding: 15px 25px;
+    font-size: 32px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button.author{
+    background-color: #005a9b;
+    box-shadow: 0 15px #003f6c;
+}
+
+.button.author:hover {background-color: #006cba}
+
+.button.author:active {
+  background-color: #006cba;
+  box-shadow: 0 10px #003f6c;
+  transform: translateY(4px);
+}
+
+.button.editor{
+    background-color: #005a9b;
+    box-shadow: 0 15px #003f6c;
+}
+
+.button.editor:hover {background-color: #006cba}
+
+.button.editor:active {
+  background-color: #006cba;
+  box-shadow: 0 10px #003f6c;
+  transform: translateY(4px);
+}
+
+.button.publisher{
+    background-color: #005a9b;
+    box-shadow: 0 15px #003f6c;
+}
+
+.button.publisher:hover {background-color: #006cba}
+
+.button.publisher:active {
+  background-color: #006cba;
+  box-shadow: 0 10px #003f6c;
+  transform: translateY(4px);
+}
+
+.column-left{ float: left; width: 33%; }
+.column-right{ float: right; width: 33%; }
+.column-middle{ display: inline-block; width: 33%; }

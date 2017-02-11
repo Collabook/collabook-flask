@@ -55,13 +55,26 @@ def home():
 
 @od.route('/login')
 def login():
-    return google.authorize(callback=flask.url_for('authorized', _external=true))
+    return google.authorize(callback=flask.url_for('authorized', _external=True))
+
+@od.route(redirect_oauth_uri)
+@google.authorized_handler
+def authorized(resp):
+    access_token = resp['access_token']
+    session['access_token'] = access_token, ''
+    return redirect(url_for('index'))
+
+
+@od.route('/api/google_info')
+def google_info():
+    return 'id={0}, secret={1}'.format(g_client_id, g_client_sec)
 
 @google.tokengetter
 def get_access_token():
     return flask.session.get('access_token')
 
 def main():
-    app.run()
+    od.run()
+
 if __name__ == '__main__':
     main()
