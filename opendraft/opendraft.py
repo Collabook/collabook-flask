@@ -17,6 +17,7 @@ login_manager.login_view = "login"
 login_manager.init_app(od)
 
 class User(db.Model):
+
    __tablename__ = 'users'
 
    email = db.Column(db.String(80), primary_key=True, nullable=False)
@@ -45,7 +46,7 @@ class User(db.Model):
    def is_anonymous(self):
         return False
    def usrExist(self, usr):
-        return User.query.filter_by(self.email = usr).first() is None;
+        return User.query.filter_by(self.email = usr).first() is None
 
 
 
@@ -53,6 +54,20 @@ class User(db.Model):
 
 
 
+
+
+
+
+
+
+
+
+
+
+class Book(db.Model):
+
+    
+    
 #########################################
 #                                       #
 #                                       #
