@@ -1,5 +1,38 @@
 import flask
-from flask_oauth import OAuth
+import flask_login
+from flask_sqlalchemy import SQLAlchemy
+from argon2 import PasswordHasher
+
+
+class User(db.Model):
+   __tablename__ = 'users'
+
+   email = db.Column(db.String(80), primary_key=True, nullable=False)
+   password = db.Column(db.String(128), nullable=False)
+   role = db.Column(db.Integer, nullable=False)
+   authenticated = db.Column(db.Boolean, default=False)
+
+   def __init__(self, email, password, role):
+      self.email = email
+      self.password = password
+      self.authenticated = False
+      self.role = role
+
+   def __repr__(self):
+        return '<User e:{0}, u:{1}>'.format(self.email, self.username)
+
+   def is_active(self):
+        return True
+
+   def get_id(self):
+        return self.email
+
+   def is_authenticated(self):
+        return self.authenticated
+
+   def is_anonymous(self):
+        return False
+
 
 
 def read_for_secrets(file):
@@ -31,47 +64,58 @@ def read_for_secrets(file):
 od = flask.Flask(__name__)
 od.debug = True
 od.secret_key = secret_key
-redirect_oauth_uri = '/api/oauth/redirect'
 od.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///databases/main.db'
+ph = PasswordHasher()
+db = SQLAlchemy(app)
 
-oauth = OAuth()
-google = oauth.remote_app('google',
-                          base_url='https://www.google.com/accounts/',
-                          authorize_url='https://accounts.google.com/o/oauth2/auth',
-                          request_token_url=None,
-                          request_token_params={'scope': 'https://www.googleapis.com/auth/userinfo.email',
-                                                'response_type': 'code'},
-                          access_token_url='https://accounts.google.com/o/oauth2/token',
-                          access_token_method='POST',
-                          access_token_params={'grant_type': 'authorization_code'},
-                          consumer_key=g_client_id,
-                          consumer_secret=g_client_sec)
-
-
-@od.route('/')
-def home():
-    a_token = flask.session.get('access_token')
-    return flask.render_template('home.html')
-
-@od.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return google.authorize(callback=flask.url_for('authorized', _external=True))
+   if flask.request.method == 'GET':
+      return flask.render_template('login.html')
+   email = flask.request.form["email"]
+   passw = flask.request.form["password"]
+   pUser = User.query.get(email)
+   if pUser:
+      if verify_password(pUser.password, passw):
+         pUser.authenticated = True
+         db.session.add(pUser)
+         db.session.commit()
+         flask_login.login_user(pUser, remember=True)
+         flask.flash('You were successfully logged in')
+         return flask.redirect(flask.url_for("root"))
+      else:
+         return flask.render_template('login.html', error='password does not match')
+   else:
+     return flask.render_template('login.html', error='user does not exist')
+     
+@login_manager.user_loader
+def user_loader(email):
+   if email_exists(email):
+      usr = User.query.filter_by(email=email).first()
+      usr.email = email
+      return usr
+   else:
+      return
 
-@od.route(redirect_oauth_uri)
-@google.authorized_handler
-def authorized(resp):
-    access_token = resp['access_token']
-    session['access_token'] = access_token, ''
-    return redirect(url_for('index'))
+@login_manager.request_loader
+def request_loader(request):
+   email = request.form.get('email')
+   passw = request.form.get('password')
+   if email_exists(email):
+      user = User.query.get(email)
+      if verify_password(user.password, passw):
+         return user
+   return
 
-
-@od.route('/api/google_info')
-def google_info():
-    return 'id={0}, secret={1}'.format(g_client_id, g_client_sec)
-
-@google.tokengetter
-def get_access_token():
-    return flask.session.get('access_token')
+@app.route('/logout')
+@flask_login.login_required
+def logout():
+    user = flask_login.current_user
+    user.authenticated = False
+    db.session.add(user)
+    db.session.commit()
+    flask_login.logout_user()
+    return flask.redirect(flask.url_for('root'))
 
 def main():
     od.run()
