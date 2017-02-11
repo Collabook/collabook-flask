@@ -17,7 +17,7 @@ login_manager.login_view = "login"
 login_manager.init_app(od)
 
 class User(db.Model):
-   __tablename__ = 'users'f
+   __tablename__ = 'users'
 
    email = db.Column(db.String(80), primary_key=True, nullable=False)
    password = db.Column(db.String(128), nullable=False)
