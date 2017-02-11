@@ -29,6 +29,11 @@ od.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///databases/main.db'
 ph = PasswordHasher()
 db = SQLAlchemy(od)
 
+
+login_manager = flask_login.LoginManager()
+login_manager.login_view = "login"
+login_manager.init_app(od)
+
 class User(db.Model):
    __tablename__ = 'users'
 
