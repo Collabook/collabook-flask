@@ -1,0 +1,13 @@
+.user{
+    float: right;
+    border-radius: 0px;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    font-size: 20px;
+    height: 100%;
+    border: 0;
+    padding: 16px 25px 16px 25px;
+    border-left: solid #ffffff 5px;
+    text-decoration: none;
+    background: 0;
+}

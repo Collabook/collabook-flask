@@ -3,23 +3,31 @@
     background-color: #005a9b;
 }
 
-.logIn {
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0px;
-  font-family: 'Roboto', sans-serif;
-  color: #ffffff;
-  font-size: 16px;
-  padding: 10px 20px 10px 20px;
-  border: solid #ffffff 5px;
-  text-decoration: none;
-    background: 0;
+.openDraft{
+    position: absolute;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    font-size: 24px;
     vertical-align: middle;
-    display: block;
+    padding: 14px 20px 12px 20px;
+}
+
+.logIn {
+    float: right;
+    border-radius: 0px;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    font-size: 16px;
+    height: 100%;
+    border: 0;
+    padding: 9px 25px 9px 25px;
+    border-left: solid #ffffff 5px;
+    text-decoration: none;
+    background: 0;
 }
 
 .logIn:hover {
-  background: #3cb0fd;
+  background: #006cba;
   text-decoration: none;
 }
 
@@ -44,21 +52,22 @@
 
 h1{
     padding-top: 2%;
+    font-size: 38px;
     text-align: center;
 }
 
 #buttonDiv{
-    padding-left: 92px;
+    padding-left: 103px;
     padding-top: 50px;
     width: 80%;
     margin: auto;
 }
 
 .button {
-    width: 250px;
-    height: 100px;
+    width: 240px;
+    height: 80px;
     padding: 15px 25px;
-    font-size: 32px;
+    font-size: 28px;
     text-align: center;
     cursor: pointer;
     outline: none;
