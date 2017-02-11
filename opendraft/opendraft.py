@@ -44,6 +44,11 @@ class User(db.Model):
 
    def is_anonymous(self):
         return False
+   def usrExist(self, usr):
+        return User.query.filter_by(self.email = usr).first() is None;
+
+
+
 
 
 
