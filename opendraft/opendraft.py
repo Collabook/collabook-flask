@@ -3,7 +3,8 @@ import flask_login
 from flask_sqlalchemy import SQLAlchemy
 from argon2 import PasswordHasher
 
-
+ph = PasswordHasher()
+db = SQLAlchemy(app)
 class User(db.Model):
    __tablename__ = 'users'
 
@@ -65,8 +66,6 @@ od = flask.Flask(__name__)
 od.debug = True
 od.secret_key = secret_key
 od.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///databases/main.db'
-ph = PasswordHasher()
-db = SQLAlchemy(app)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -87,7 +86,7 @@ def login():
          return flask.render_template('login.html', error='password does not match')
    else:
      return flask.render_template('login.html', error='user does not exist')
-     
+
 @login_manager.user_loader
 def user_loader(email):
    if email_exists(email):
