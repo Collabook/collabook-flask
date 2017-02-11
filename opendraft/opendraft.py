@@ -6,25 +6,7 @@ from argon2 import PasswordHasher
 od = flask.Flask(__name__)
 od.debug = True
 
-
-def read_for_secrets(file):
-    insides = None
-    id = None
-    dev_sec = None
-    secret = None
-    with open('secrets/{}'.format(file)) as f:
-        for line in f:
-            if not line.startswith('|'):
-                if line.startswith('id'):
-                    id = line.split('=')[1]
-                elif line.startswith('sec'):
-                    secret = line.split('=')[1]
-                elif line.startswith('dev'):
-                    dev_sec = line.split('=')[1]
-    return (dev_sec, id, secret)
-
-(secret_key, g_client_id, g_client_sec) = read_for_secrets('google.secret')
-od.secret_key = secret_key
+od.secret_key = "Y7L1xOBu2A0d08zUWO63753m3"
 od.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///databases/main.db'
 ph = PasswordHasher()
 db = SQLAlchemy(od)
@@ -73,6 +55,23 @@ class User(db.Model):
 #                                       #
 #                                       #
 #########################################
+
+def email_exists(email):
+    allUsers = User.query.all()
+    for user in allUsers:
+        if user.email == email:
+            return True
+    return False
+
+def verify_password(hash, passx):
+    try:
+        return ph.verify(hash, passx)
+    except:
+        return False
+
+@od.route('/')
+def index():
+    return flask.render_template('home.html')
 
 @od.route('/login', methods=['GET', 'POST'])
 def login():
