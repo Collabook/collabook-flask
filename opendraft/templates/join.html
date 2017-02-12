@@ -20,12 +20,17 @@
         <div id="homepage">
             <div id="main">
                 <div id="loginFormDiv">
-                <form action="login" class="loginForm" method='POST'>
+                {% if error %}
+                    <p style="padding-top: 4vh; font-size: 2.5vw;">Error -- {{ error }}</p>
+                {% endif %}
+                <form action="join" class="loginForm" method='POST'>
                     <input class="loginField" type="text" name="email" placeholder="Email">
+                    <br>
+                    <input class="loginField" type="text" name="fullname" placeholder="Full Name">
                     <br>
                     <input class="loginField" type="password" name="password" placeholder="Password">
                     <br><br>
-                    <input class="loginButton" type="submit" value="Submit">
+                    <button class="loginButton" name="role_num" type="submit" value="{{ role_num }}">Submit</button>
                 </form> 
                 </div>
             </div>

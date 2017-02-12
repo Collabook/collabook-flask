@@ -28,8 +28,7 @@
     color: #ffffff;
     font-size: 24px;
 }
-
-.loginField{
+.loginField {
     outline: none;
     width: 40%;
     border: 5px solid #005a9b;
@@ -40,6 +39,17 @@
     margin-bottom: 20px;
     margin-top: 5px;
 }
+
+.loginField-left {
+    float: left;
+    width: 20%;
+}
+
+.loginField-right {
+    float: right;
+    width: 20%;
+}
+
 
 .loginButton {
     width: 150px;

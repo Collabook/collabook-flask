@@ -4,4 +4,40 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-opendraft.py	app/opendraft.py	1;"	kind:file	line:1
+Book	opendraft/opendraft.py	/^class Book(db.Model):$/;"	kind:class	line:56
+PasswordHasher	opendraft/opendraft.py	/^from argon2 import PasswordHasher$/;"	kind:namespace	line:4
+SQLAlchemy	opendraft/opendraft.py	/^from flask_sqlalchemy import SQLAlchemy$/;"	kind:namespace	line:3
+User	opendraft/opendraft.py	/^class User(db.Model):$/;"	kind:class	line:19
+__init__	opendraft/opendraft.py	/^   def __init__(self, email, fullName, password, role):$/;"	kind:member	line:29
+__repr__	opendraft/opendraft.py	/^   def __repr__(self):$/;"	kind:member	line:36
+__tablename__	opendraft/opendraft.py	/^    __tablename__ = 'book'$/;"	kind:variable	line:57
+__tablename__	opendraft/opendraft.py	/^   __tablename__ = 'users'$/;"	kind:variable	line:21
+authenticated	opendraft/opendraft.py	/^   authenticated = db.Column(db.Boolean, default=False)$/;"	kind:variable	line:27
+db	opendraft/opendraft.py	/^db = SQLAlchemy(od)$/;"	kind:variable	line:12
+docs	opendraft/opendraft.py	/^def docs(page):$/;"	kind:function	line:170
+document	opendraft/opendraft.py	/^def document():$/;"	kind:function	line:146
+email	opendraft/opendraft.py	/^    email = db.Column(db.String(80), primary_key=True, nullable=False)$/;"	kind:variable	line:59
+email	opendraft/opendraft.py	/^   email = db.Column(db.String(80), primary_key=True, nullable=False)$/;"	kind:variable	line:23
+fileid	opendraft/opendraft.py	/^    fileid = db.Column(db.Integer, nullable=False)$/;"	kind:variable	line:60
+flask	opendraft/opendraft.py	/^import flask$/;"	kind:namespace	line:1
+flask_login	opendraft/opendraft.py	/^import flask_login$/;"	kind:namespace	line:2
+fullNAme	opendraft/opendraft.py	/^   fullNAme = db.Column(db.String(64), nullable=False)$/;"	kind:variable	line:25
+get_id	opendraft/opendraft.py	/^   def get_id(self):$/;"	kind:member	line:42
+index	opendraft/opendraft.py	/^def index():$/;"	kind:function	line:80
+is_active	opendraft/opendraft.py	/^   def is_active(self):$/;"	kind:member	line:39
+is_anonymous	opendraft/opendraft.py	/^   def is_anonymous(self):$/;"	kind:member	line:48
+is_authenticated	opendraft/opendraft.py	/^   def is_authenticated(self):$/;"	kind:member	line:45
+join	opendraft/opendraft.py	/^def join():$/;"	kind:function	line:84
+login	opendraft/opendraft.py	/^def login():$/;"	kind:function	line:127
+login_manager	opendraft/opendraft.py	/^login_manager = flask_login.LoginManager()$/;"	kind:variable	line:15
+logout	opendraft/opendraft.py	/^def logout():$/;"	kind:function	line:175
+main	opendraft/opendraft.py	/^def main():$/;"	kind:function	line:183
+od	opendraft/opendraft.py	/^od = flask.Flask(__name__)$/;"	kind:variable	line:6
+opendraft.py	opendraft/opendraft.py	1;"	kind:file	line:1
+password	opendraft/opendraft.py	/^   password = db.Column(db.String(128), nullable=False)$/;"	kind:variable	line:24
+ph	opendraft/opendraft.py	/^ph = PasswordHasher()$/;"	kind:variable	line:11
+request_loader	opendraft/opendraft.py	/^def request_loader(request):$/;"	kind:function	line:159
+role	opendraft/opendraft.py	/^   role = db.Column(db.Integer, nullable=False)$/;"	kind:variable	line:26
+userExists	opendraft/opendraft.py	/^def userExists(email):$/;"	kind:function	line:53
+user_loader	opendraft/opendraft.py	/^def user_loader(email):$/;"	kind:function	line:150
+verify_password	opendraft/opendraft.py	/^def verify_password(hash, passx):$/;"	kind:function	line:73

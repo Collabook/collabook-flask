@@ -19,7 +19,9 @@
         <div id="homepage">
             <div id="main">
                 <div id="loginFormDiv">
+                {% if error %}
                 <p style="padding-top: 4vh; font-size: 2.5vw;">Error -- {{ error }}</p>
+                {% endif %}
                 <form action="login" class="loginForm" method='POST'>
                     <input class="loginField" type="text" name="email" placeholder="Email">
                     <br>

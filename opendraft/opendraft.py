@@ -22,11 +22,13 @@ class User(db.Model):
 
    email = db.Column(db.String(80), primary_key=True, nullable=False)
    password = db.Column(db.String(128), nullable=False)
+   fullName = db.Column(db.String(64), nullable=False)
    role = db.Column(db.Integer, nullable=False)
    authenticated = db.Column(db.Boolean, default=False)
 
-   def __init__(self, email, password, role):
+   def __init__(self, email, fullName, password, role):
       self.email = email
+      self.fullName = fullName
       self.password = password
       self.authenticated = False
       self.role = role
@@ -78,26 +80,47 @@ def verify_password(hash, passx):
 def index():
     return flask.render_template('home.html')
 
-@od.route('/join', methods=['POST'])
+@od.route('/join', methods=['GET', 'POST'])
 def join():
     if 'role' in flask.request.form:
         role_num = flask.request.form['role']
-        role = ""
-        if role_num == 0:
+        role = None
+        v_role_name = ""
+        if role_num == '0':
             role = "Author"
-        elif role_num == 1:
+        elif role_num == '1':
             role = "Editor"
-        elif role_num == 2:
+        elif role_num == '2':
             role = "Publisher"
+        else:
+            role = "Unknown"
         if role.startswith('A') or role.startswith('E'):
             v_role_name = 'n {0}'.format(role)
         else:
             v_role_name = ' {0}'.format(role)
-        return flask.render_template('join.html', role_name=role, v_role_name=v_role_name)
+        print('"{0}" "{1}" "{2}"'.format(role_num, role, v_role_name))
+        return flask.render_template('join.html', role_num=role_num, v_role_name=v_role_name)
+    if not 'email' in flask.request.form:
+        return flask.redirect(flask.url_for('index'))
     email = flask.request.form['email']
     password = flask.request.form['password']
-
-    return flask.redirect(flask.urlfor('document'))
+    fullName = flask.request.form['fullname']
+    role_num = flask.request.form['role_num']
+    if not email:
+        return flask.render_template('join.html', error="email field is empty")
+    if not password:
+        return flask.render_template('join.html', error="password field is empty")
+    if not fullName:
+        return flask.render_template('join.html', error="name field is empty")
+    user = userExists(email)
+    if not user is None:
+        return flask.render_template('join.html', error="a user with that email already exists")
+    user = User(email, fullName, ph.hash(password), role_num)
+    with db.session.no_autoflush:
+        db.session.add(user)
+        db.session.commit()
+    flask_login.login_user(user, remember=True)
+    return flask.redirect(flask.url_for("document"))
 
 
 @od.route('/login', methods=['GET', 'POST'])
@@ -114,7 +137,7 @@ def login():
     if user is None:
         return flask.render_template('login.html', error="user does not exist")
     if verifyPassword(user.password, password):
-        return flask.redirect(flask.urlfor('/'))
+        return flask.redirect(flask.url_for('root'))
     return flask.render_template('login.html', error="password does not match the account on file")
 
     
@@ -125,7 +148,7 @@ def document():
 
 @login_manager.user_loader
 def user_loader(email):
-   if email_exists(email):
+   if userExists(email):
       usr = User.query.filter_by(email=email).first()
       usr.email = email
       return usr
@@ -155,7 +178,7 @@ def logout():
     db.session.add(user)
     db.session.commit()
     flask_login.logout_user()
-    return flask.redirect(flask.url_for('root'))
+    return flask.redirect(flask.url_for('index'))
 
 def main():
     od.run()
