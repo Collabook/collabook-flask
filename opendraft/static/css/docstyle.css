@@ -4,6 +4,44 @@ html, body{
     background-color: #222222;
 }
 
+#exploreButtons{
+    text-align: center;
+    color: #dbdbdb;
+    font-family: 'Roboto', 'sans-serif';
+    font-size: 22px;
+}
+
+#exploreLeft{
+    float: left;
+    width: 50%;
+}
+
+#exploreRight{
+    float: right;
+    width: 50%;
+}
+
+#exploreLeftButton{
+    width: 100%;
+    background-color: #222222;
+    border: 2px solid #4591c7;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+#exploreLeftButton:hover{
+    background-color: #4591c7;
+    color: 0;
+}
+
+#exploreRightButton{
+    width: 100%;
+    background-color: #222222;
+    border: 2px solid #4591c7;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
 .buttons{
     float: right;
     margin-top: -40px;
