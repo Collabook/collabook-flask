@@ -25,9 +25,7 @@ class User(db.Model):
    fullName = db.Column(db.String(64), nullable=False)
    role = db.Column(db.Integer, nullable=False)
    authenticated = db.Column(db.Boolean, default=False)
-   f_name = db.Column(db.String(32), nullable = False)
-   l_name = db.Column(db.String(32), nullable = False);
-   
+
 
    def __init__(self, email, fullName, password, role):
       self.email = email
