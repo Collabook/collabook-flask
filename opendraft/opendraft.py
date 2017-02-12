@@ -24,6 +24,9 @@ class User(db.Model):
    password = db.Column(db.String(128), nullable=False)
    role = db.Column(db.Integer, nullable=False)
    authenticated = db.Column(db.Boolean, default=False)
+   f_name = db.Column(db.String(32), nullable = False)
+   l_name = db.Column(db.String(32), nullable = False);
+   
 
    def __init__(self, email, password, role):
       self.email = email
@@ -56,6 +59,7 @@ class Book(db.Model):
 
     email = db.Column(db.String(80), primary_key=True, nullable=False)
     fileid = db.Column(db.Integer, nullable=False)
+
 
 
 
