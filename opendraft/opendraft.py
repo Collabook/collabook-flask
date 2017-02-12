@@ -60,6 +60,10 @@ class Book(db.Model):
     email = db.Column(db.String(80), primary_key=True, nullable=False)
     fileid = db.Column(db.Integer, nullable=False)
 
+    def get_email(self):
+        return self.email
+    def get_fileid(self):
+        return self.fileid
 
 
 
