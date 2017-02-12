@@ -45,20 +45,20 @@ class User(db.Model):
 
    def is_anonymous(self):
         return False
-   def usrExist(self, usr):
-        return User.query.filter_by(self.email = usr).first() is None
+
+
+
+def userExists(email):
+    return User.query.filter_by(email=email).first()
 
 class Book(db.Model):
     __tablename__ = 'book'
 
     email = db.Column(db.String(80), primary_key=True, nullable=False)
-    password = db.Column(db.Stringb (1000000), nullable=False)
-
-    
+    fileid = db.Column(db.Integer, nullable=False)
 
 
-    
-    
+
 #########################################
 #                                       #
 #                                       #
@@ -67,12 +67,6 @@ class Book(db.Model):
 #                                       #
 #########################################
 
-def email_exists(email):
-    allUsers = User.query.all()
-    for user in allUsers:
-        if user.email == email:
-            return True
-    return False
 
 def verify_password(hash, passx):
     try:
@@ -84,12 +78,46 @@ def verify_password(hash, passx):
 def index():
     return flask.render_template('home.html')
 
+@od.route('/join', methods=['POST'])
+def join():
+    if 'role' in flask.request.form:
+        role_num = flask.request.form['role']
+        role = ""
+        if role_num == 0:
+            role = "Author"
+        elif role_num == 1:
+            role = "Editor"
+        elif role_num == 2:
+            role = "Publisher"
+        if role.startswith('A') or role.startswith('E'):
+            v_role_name = 'n {0}'.format(role)
+        else:
+            v_role_name = ' {0}'.format(role)
+        return flask.render_template('join.html', role_name=role, v_role_name=v_role_name)
+    email = flask.request.form['email']
+    password = flask.request.form['password']
+
+    return flask.redirect(flask.urlfor('document'))
+
+
 @od.route('/login', methods=['GET', 'POST'])
 def login():
     if flask.request.method == 'GET':
         return flask.render_template('login.html')
-    flask_login.login_user(User("admin@od.haze.pw", "test", 1), remember=True)
-    return flask.redirect(flask.url_for('document'))
+    email = flask.request.form['email']
+    password = flask.request.form['password']
+    if not email:
+        return flask.render_template('login.html', error="email field empty")
+    if not password:
+        return flask.render_template('login.html', error="password field empty")
+    user = userExists(email)
+    if user is None:
+        return flask.render_template('login.html', error="user does not exist")
+    if verifyPassword(user.password, password):
+        return flask.redirect(flask.urlfor('/'))
+    return flask.render_template('login.html', error="password does not match the account on file")
+
+    
 
 @od.route('/document')
 def document():
@@ -113,6 +141,11 @@ def request_loader(request):
       if verify_password(user.password, passw):
          return user
    return
+
+@od.route('/doc/', defaults={'page': '0'})
+@od.route('/doc/<page>')
+def docs(page):
+    return flask.render_template('edit_doc.html', page=page)
 
 @od.route('/logout')
 @flask_login.login_required

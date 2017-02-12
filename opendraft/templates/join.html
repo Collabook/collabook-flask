@@ -15,11 +15,11 @@
     <body>
         <div id="header">
             <p class="openDraft">OPEN DRAFT</p>
+            <p class="user">Signing up as a{{ v_role_name }}</p>
         </div>
         <div id="homepage">
             <div id="main">
                 <div id="loginFormDiv">
-                <p style="padding-top: 4vh; font-size: 2.5vw;">Error -- {{ error }}</p>
                 <form action="login" class="loginForm" method='POST'>
                     <input class="loginField" type="text" name="email" placeholder="Email">
                     <br>
