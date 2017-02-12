@@ -142,7 +142,7 @@ def login():
     user = userExists(email)
     if user is None:
         return flask.render_template('login.html', error="user does not exist")
-    if verifyPassword(user.password, password):
+    if verify_password(user.password, password):
         return flask.redirect(flask.url_for('root'))
     return flask.render_template('login.html', error="password does not match the account on file")
 
