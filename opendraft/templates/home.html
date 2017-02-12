@@ -21,9 +21,11 @@
             <img src="../static/assets/ODLogoWhite.png" id="logo">
             <h1>I am an...</h1>
             <div id="buttonDiv">
-                <div class="column-left"><button class="button author">Author</button></div>
-                <div class="column-middle"><button class="button editor">Editor</button></div>
-                <div class="column-right"><button class="button publisher">Publisher</button></div>
+                <form action="join" method="POST">
+                    <div class="column-left"><button type="submit" name="role" value="0" class="button author">Author</button></div>
+                    <div class="column-middle"><button type="submit" name="role" value="1" class="button editor">Editor</button></div>
+                    <div class="column-right"><button type="submit" name="role" value="2" class="button publisher">Publisher</button></div>
+                </form>
             </div>
             </div>
         </div>

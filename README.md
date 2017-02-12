@@ -12,4 +12,4 @@ authors
 --------
 Navid - Frontend
 Haze - Backend
-David - Basically nothing
+David - Backend God
