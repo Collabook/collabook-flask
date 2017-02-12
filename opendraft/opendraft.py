@@ -136,7 +136,7 @@ def user_loader(email):
 def request_loader(request):
    email = request.form.get('email')
    passw = request.form.get('password')
-   if email_exists(email):
+   if userExists(email):
       user = User.query.get(email)
       if verify_password(user.password, passw):
          return user
