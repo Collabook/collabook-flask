@@ -152,6 +152,10 @@ def login():
 def document():
     return flask.render_template('document.html')
 
+@od.route('/explore')
+def explore():
+    return flask.render_template('explore.html')
+
 @login_manager.user_loader
 def user_loader(email):
    if userExists(email):
