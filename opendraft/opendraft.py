@@ -86,41 +86,45 @@ def verify_password(hash, passx):
 def index():
     return flask.render_template('home.html')
 
+def format_role(role_num):
+    role = None
+    v_role_name = ""
+    if role_num == '0':
+        role = "Author"
+    elif role_num == '1':
+        role = "Editor"
+    elif role_num == '2':
+        role = "Publisher"
+    else:
+        role = "Unknown"
+    if role.startswith('A') or role.startswith('E'):
+        v_role_name = 'n {0}'.format(role)
+    else:
+        v_role_name = ' {0}'.format(role)
+    return (role, v_role_name)
+
 @od.route('/join', methods=['GET', 'POST'])
 def join():
     if 'role' in flask.request.form:
         role_num = flask.request.form['role']
-        role = None
-        v_role_name = ""
-        if role_num == '0':
-            role = "Author"
-        elif role_num == '1':
-            role = "Editor"
-        elif role_num == '2':
-            role = "Publisher"
-        else:
-            role = "Unknown"
-        if role.startswith('A') or role.startswith('E'):
-            v_role_name = 'n {0}'.format(role)
-        else:
-            v_role_name = ' {0}'.format(role)
-        print('"{0}" "{1}" "{2}"'.format(role_num, role, v_role_name))
+        (role, v_role_name) = format_role(role_num)
         return flask.render_template('join.html', role_num=role_num, v_role_name=v_role_name)
     if not 'email' in flask.request.form:
         return flask.redirect(flask.url_for('index'))
+    (role, v_role_name) = format_role(flask.request.form['role_num'])
     email = flask.request.form['email']
     password = flask.request.form['password']
     fullName = flask.request.form['fullname']
     role_num = flask.request.form['role_num']
     if not email:
-        return flask.render_template('join.html', error="email field is empty")
+        return flask.render_template('join.html', v_role_name=v_role_name, error="email field is empty")
     if not password:
-        return flask.render_template('join.html', error="password field is empty")
+        return flask.render_template('join.html', v_role_name=v_role_name, error="password field is empty")
     if not fullName:
-        return flask.render_template('join.html', error="name field is empty")
+        return flask.render_template('join.html', v_role_name=v_role_name, error="name field is empty")
     user = userExists(email)
     if not user is None:
-        return flask.render_template('join.html', error="a user with that email already exists")
+        return flask.render_template('join.html', v_role_name=v_role_name, error="a user with that email already exists")
     user = User(email, fullName, ph.hash(password), role_num)
     with db.session.no_autoflush:
         db.session.add(user)
